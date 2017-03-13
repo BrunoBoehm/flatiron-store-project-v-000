@@ -1,7 +1,16 @@
-<% @categories.each do |category| %>
-  <%= link_to category.title, category_path(category) %>
-<% end %>
+<h1>Store Home</h1>
 
+<h3>Categories</h3>
+  <p><%= link_to "All categories", categories_path %></p>
+  <ul>
+    <% @categories.each do |category| %>
+      <li><%= link_to category.title, category_path(category) %></li>
+    <% end %>
+  </ul>
+
+<h3>Items</h3>
 <% @items.each do |item| %>
-  <p><%= item.title %> | <%= number_to_currency(item.price) %> | <%= button_to 'Add to Cart', line_items_path(item_id: item) %></p>
+  <% if item.inventory > 0 %>
+    <p><%= link_to "#{item.title} | #{number_to_currency(item.price.to_f/100)}", item_path(item) %> <%= button_to 'Add to Cart', line_items_path(item_id: item) if user_signed_in? %></p>
+  <% end %>
 <% end %>

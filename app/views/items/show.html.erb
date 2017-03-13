@@ -1,2 +1,10 @@
 <h1><%= @item.title %></h1>
+
 <h2>$ <%= @item.price %></h2>
+<h2><%= number_to_currency(@item.price.to_f/100) %></h2>
+
+<h3>Hurry up, only <%= @item.inventory %> left</h3>
+
+<% if user_signed_in? %>
+	<p><%= button_to 'Add to Cart', line_items_path(item_id: @item)%></p>
+<% end %>

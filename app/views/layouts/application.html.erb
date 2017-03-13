@@ -10,6 +10,12 @@
 <body>
 
 <%= render 'layouts/header' %>
+
+<div>
+	<%= content_tag :p, flash[:notice] if flash[:notice]%>
+	<%= content_tag :p, flash[:alert] if flash[:alert]%>
+</div>
+
 <%= yield %>
 
 </body>
